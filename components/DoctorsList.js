@@ -1,3 +1,4 @@
+import React from "react";
 import {
   Image,
   ScrollView,
@@ -6,7 +7,6 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import React from "react";
 import { FontAwesome } from "react-native-vector-icons";
 
 const DoctorsList = () => {
@@ -44,7 +44,7 @@ const DoctorsList = () => {
 
   // Function to render an individual doctor card
   const renderDoctorCard = ({ item }) => (
-    <View style={styles.doctorCard}>
+    <View key={item.id} style={styles.doctorCard}>
       <Image source={{ uri: item.image }} style={styles.doctorImage} />
       <Text style={styles.doctorName}>{item.name}</Text>
       <Text style={styles.doctorSpecialty}>{item.specialty}</Text>
@@ -57,14 +57,16 @@ const DoctorsList = () => {
   return (
     <View style={styles.doctorsContainer}>
       <Text style={styles.doctorsTitle}>Our Top Doctors</Text>
-      <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-        <View style={{ flexDirection: "row" }}>
-          {ourDoctors.map((item) => renderDoctorCard({ item }))}
-          <TouchableOpacity style={styles.showMoreButton}>
-            <Text style={styles.showMoreButtonText}>Show all Doctors </Text>
-            <FontAwesome name="arrow-right" size={15} color="#fff" />
-          </TouchableOpacity>
-        </View>
+      <ScrollView
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        contentContainerStyle={styles.scrollViewContent}
+      >
+        {ourDoctors.map((item) => renderDoctorCard({ item }))}
+        <TouchableOpacity style={styles.showMoreButton}>
+          <Text style={styles.showMoreButtonText}>Show all Doctors </Text>
+          <FontAwesome name="arrow-right" size={15} color="#fff" style={styles.arrowIcon} />
+        </TouchableOpacity>
       </ScrollView>
     </View>
   );
@@ -74,7 +76,6 @@ export default DoctorsList;
 
 const styles = StyleSheet.create({
   doctorsContainer: {
-    // paddingHorizontal: 10,
     marginTop: 20,
   },
   doctorsTitle: {
@@ -104,11 +105,11 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: "#666",
   },
-  showMoreButtonContainer: {
+  scrollViewContent: {
+    flexDirection: "row",
     alignItems: "center",
-    marginTop: 10,
   },
-  learnMoreButton:{
+  learnMoreButton: {
     flexDirection: "row",
     alignItems: "center",
     backgroundColor: "#00b894",
@@ -117,29 +118,27 @@ const styles = StyleSheet.create({
     marginTop: 10,
     justifyContent: "center",
   },
-  learnMoreButtonText:{
+  learnMoreButtonText: {
     fontSize: 14,
     fontWeight: "bold",
     color: "#fff",
   },
   showMoreButton: {
-    flexDirection: "column",
+    flexDirection: "row",
     alignItems: "center",
     backgroundColor: "#ddd",
     borderRadius: 10,
-    // padding: 6,
     marginLeft: 10,
     marginTop: 10,
     justifyContent: "center",
+    padding: 10,
   },
-
   showMoreButtonText: {
     fontSize: 14,
     fontWeight: "bold",
     color: "#000",
   },
-
   arrowIcon: {
-    marginLeft: 5, // Add some spacing between text and arrow
+    marginLeft: 5,
   },
 });

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   StyleSheet,
   Text,
@@ -19,8 +19,27 @@ import Recommendations from "../components/Recommendations";
 import DoctorsList from "../components/DoctorsList";
 import ServicesList from "../components/ServicesList";
 import TestimonialList from "../components/TestimonialList";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const HomeScreen = () => {
+  const [userData, setUserData] = useState(null);
+
+  useEffect(() => {
+    fetchUserData();
+  }, []);
+
+  const fetchUserData = async () => {
+    try {
+      const userDataString = await AsyncStorage.getItem('userData');
+      if (userDataString) {
+        const { user } = JSON.parse(userDataString);
+        setUserData(user);
+      }
+    } catch (error) {
+      console.error('Error fetching user data:', error);
+    }
+  };
+
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <ScrollView>
@@ -30,7 +49,7 @@ const HomeScreen = () => {
         >
           <View style={styles.topContainer}>
             <BlurView intensity={20} style={styles.blurContainer}>
-              <Text style={styles.greetingName}>Hello, Rajkumar</Text>
+              <Text style={styles.greetingName}>Hello, {userData?.name}</Text>
               <Image
                 source={require("../assets/avatar.jpg")}
                 style={styles.avatar}

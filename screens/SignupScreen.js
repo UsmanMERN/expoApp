@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import {
   View,
   Text,
@@ -18,6 +18,8 @@ import CustomButton from "../components/CustomButton";
 import axios from "axios";
 import { useNavigation } from "@react-navigation/native";
 import { BlurView } from "expo-blur";
+import { AuthContext } from "../context/AuthContext";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const SignupScreen = () => {
   const [name, setName] = useState("");
@@ -31,7 +33,7 @@ const SignupScreen = () => {
   const [acceptTerms, setAcceptTerms] = useState(false);
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [chosenDate, setChosenDate] = useState(new Date());
-
+  const { updateAuthentication } = useContext(AuthContext);
   const navigation = useNavigation();
 
   // Replace localhost with your machine's IP address
@@ -117,7 +119,11 @@ const SignupScreen = () => {
 
         // Registration successful
         Alert.alert("Success", "Account created successfully!");
-        navigation.navigate("Home");
+        // navigation.navigate("Home");
+        updateAuthentication(true);
+
+        const userData = response.data; // Assuming the response contains user details
+        await AsyncStorage.setItem('userData', JSON.stringify(userData));
       } else {
         throw new Error("Registration failed");
       }

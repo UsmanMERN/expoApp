@@ -1,12 +1,5 @@
-import {
-  Image,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
 import React from "react";
+import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { FontAwesome5 } from "react-native-vector-icons";
 
 const Featured = () => {
@@ -19,7 +12,7 @@ const Featured = () => {
       title: "Cardiologist",
       description: "Expert care for your heart health",
       icon: "heartbeat",
-      color: "blue",
+      color: "#3498db", // Changed to a valid color value
     },
     {
       id: "2",
@@ -28,7 +21,7 @@ const Featured = () => {
       title: "Dermatologist",
       description: "Skin care and treatments",
       icon: "spa",
-      color: "green",
+      color: "#27ae60", // Changed to a valid color value
     },
     {
       id: "3",
@@ -37,31 +30,28 @@ const Featured = () => {
       title: "Emergency Care",
       description: "Available 24/7 for urgent cases",
       icon: "ambulance",
-      color: "red",
+      color: "#e74c3c", // Changed to a valid color value
     },
     // Add more feature data as needed
   ];
 
   // Render individual card item
   const renderCardItem = ({ item }) => (
-    <View style={styles.card}>
+    <View key={item.id} style={styles.card}>
       <Image source={{ uri: item.image }} style={styles.cardImage} />
       <View style={styles.cardTextField}>
         <View style={styles.cardTextFields}>
           <Text style={styles.cardTitle}>{item.title}</Text>
           <Text style={styles.cardSpecialty}>{item.description}</Text>
         </View>
-        <View style={styles.cardButton}>
-          <TouchableOpacity style={styles.iconContainer}>
-            <FontAwesome5
-              name={item.icon}
-              size={22}
-              color={item.color}
-              style={styles.iconStyle}
-            />
-            {/* Display the specified icon and color for each card */}
-          </TouchableOpacity>
-        </View>
+        <TouchableOpacity style={[styles.iconContainer, { backgroundColor: item.color }]}>
+          <FontAwesome5
+            name={item.icon}
+            size={22}
+            color="#fff"
+            style={styles.iconStyle}
+          />
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -93,11 +83,13 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
   },
-  iconStyle: {
-    padding: 12,
+  iconContainer: {
     borderRadius: 30,
-    backgroundColor: "#fff",
+    padding: 12,
     elevation: 5,
+  },
+  iconStyle: {
+    // No need to specify background color here
   },
   cardImage: {
     width: "100%",
@@ -112,8 +104,5 @@ const styles = StyleSheet.create({
   cardSpecialty: {
     fontSize: 14,
     color: "#666",
-  },
-  cardButton: {
-    alignItems: "center",
   },
 });

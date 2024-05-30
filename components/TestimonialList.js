@@ -1,3 +1,4 @@
+import React from "react";
 import {
   Image,
   ScrollView,
@@ -6,7 +7,6 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import React from "react";
 
 const TestimonialList = () => {
   const dummyTestimonials = [
@@ -34,7 +34,7 @@ const TestimonialList = () => {
   ];
 
   const renderTestimonialCard = (testimonial) => (
-    <View style={styles.testimonialCard}>
+    <View key={testimonial.id} style={styles.testimonialCard}>
       <Image
         source={{ uri: testimonial.profilePicture }}
         style={styles.testimonialImage}
@@ -63,39 +63,39 @@ const TestimonialList = () => {
 export default TestimonialList;
 
 const styles = StyleSheet.create({
-
-    testimonialsContainer: {
-        marginTop: 20,
-        marginBottom: 10,
-      },
-      testimonialsTitle: {
-        fontSize: 20,
-        fontWeight: "bold",
-        marginBottom: 10,
-        paddingHorizontal: 10,
-      },
-      testimonialScrollView: {
-        paddingLeft: 10,
-      },
-      testimonialCard: {
-        width: 250,
-        marginRight: 10,
-        backgroundColor: "#fff",
-        borderRadius: 10,
-        padding: 10,
-      },
-      testimonialImage: {
-        width: 60,
-        height: 60,
-        borderRadius: 30,
-      },
-      testimonialName: {
-        fontSize: 16,
-        fontWeight: "bold",
-        marginTop: 10,
-      },
-      testimonialText: {
-        fontSize: 14,
-        color: "#666",
-      },
+  testimonialsContainer: {
+    marginTop: 20,
+    marginBottom: 10,
+  },
+  testimonialsTitle: {
+    fontSize: 20,
+    fontWeight: "bold",
+    marginBottom: 10,
+    paddingHorizontal: 10,
+  },
+  testimonialScrollView: {
+    paddingLeft: 10,
+  },
+  testimonialCard: {
+    width: 250,
+    marginRight: 10,
+    backgroundColor: "#fff",
+    borderRadius: 10,
+    padding: 10,
+  },
+  testimonialImage: {
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    marginBottom: 10,
+  },
+  testimonialName: {
+    fontSize: 16,
+    fontWeight: "bold",
+    marginBottom: 5,
+  },
+  testimonialText: {
+    fontSize: 14,
+    color: "#666",
+  },
 });

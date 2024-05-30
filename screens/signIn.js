@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import {
   View,
   Text,
@@ -15,24 +15,23 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import CustomButton from "../components/CustomButton";
 import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
-import { useAuth } from "../AuthContext"; // Import the useAuth hook
+// import { useAuth } from "../AuthContext"; // Import the useAuth hook
+import { AuthContext } from "../context/AuthContext";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const SignIn = () => {
-  const { updateAuthentication } = useAuth(); // Access the updateAuthentication function from the AuthContext
+  // const { updateAuthentication } = useAuth(); // Access the updateAuthentication function from the AuthContext
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-
+  const { updateAuthentication } = useContext(AuthContext);
   const navigation = useNavigation();
 
   const handleGoToSignup = () => {
     navigation.navigate("Signup");
-  };
-  const handleGoToHome = () => {
-    navigation.navigate("Home");
   };
 
   const togglePasswordVisibility = () => {
@@ -74,10 +73,13 @@ const SignIn = () => {
         // Login successful
         Alert.alert("Success", "Login successful!");
         await updateAuthentication(true); // Update authentication state
+
+        // Store user data in AsyncStorage
+        const userData = response.data; // Assuming the response contains user details
+        await AsyncStorage.setItem('userData', JSON.stringify(userData));
+
         // Explicitly navigate to the "Home" screen
-        // console.log('userAuthenticated', userAuthenticated)
-        await navigation.navigate("Home");
-        // handleGoToHome()
+        // navigation.navigate("Home");
       } else {
         setError("Email or password is incorrect.");
       }

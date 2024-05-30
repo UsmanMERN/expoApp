@@ -1,5 +1,3 @@
-// userModel.js
-
 const mongoose = require("mongoose");
 
 const userSchema = new mongoose.Schema({
@@ -40,5 +38,11 @@ const userSchema = new mongoose.Schema({
     required: true,
   },
 });
+
+// Add a method to the user schema to find a user by email
+userSchema.statics.findByEmail = async function (email) {
+  const user = await this.findOne({ email });
+  return user;
+};
 
 module.exports = mongoose.model("User", userSchema);

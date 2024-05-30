@@ -7,7 +7,7 @@ import { useAuth } from "../AuthContext"; // Import the useAuth hook
 const Stack = createStackNavigator();
 
 const OnboardingNavigation = () => {
-  const { updateAuthentication } = useAuth(); // Access the updateAuthentication function from the AuthContext
+  // const { updateAuthentication } = useAuth(); // Access the updateAuthentication function from the AuthContext
 
   return (
     <Stack.Navigator>
@@ -20,7 +20,7 @@ const OnboardingNavigation = () => {
         name="Signin"
         component={SigninScreen}
         options={{ headerShown: false }}
-        initialParams={{ updateAuthentication }} // Pass the updateAuthentication function as a parameter
+      // initialParams={{ updateAuthentication }} // Pass the updateAuthentication function as a parameter
       />
     </Stack.Navigator>
   );

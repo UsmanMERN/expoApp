@@ -35,17 +35,15 @@ exports.getAllUsers = async (req, res) => {
 // Get a specific user by ID
 exports.getUserById = async (req, res) => {
   try {
-    const userId = req.params.id;
-    const user = await User.findById(userId);
+    const { email } = req.params;
+    const user = await User.findOne({ email });
     if (!user) {
-      res.status(404).json({ message: "User not found" });
-    } else {
-      res.status(200).json(user);
+      return res.status(404).json({ message: "User not found" });
     }
+    res.status(200).json(user);
   } catch (error) {
-    res
-      .status(500)
-      .json({ message: "Error fetching user", error: error.message });
+    console.error("Error fetching user data:", error);
+    res.status(500).json({ message: "Internal server error" });
   }
 };
 

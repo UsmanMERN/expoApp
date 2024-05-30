@@ -48,7 +48,8 @@ exports.signup = async (req, res) => {
 
     await user.save();
 
-    res.status(201).json({ message: "Signup successful" });
+    // Return the complete user object
+    res.status(201).json({ message: "Signup successful", user });
   } catch (error) {
     res.status(500).json({ message: "Signup failed", error: error.message });
   }
@@ -77,8 +78,8 @@ exports.signin = async (req, res) => {
         .json({ message: "Email or password is incorrect." });
     }
 
-    // Return a success message or a JWT token for authentication
-    res.status(200).json({ message: "Login successful" });
+    // Return the complete user object
+    res.status(200).json({ message: "Login successful", user });
   } catch (error) {
     res.status(500).json({ message: "Login failed", error: error.message });
   }
