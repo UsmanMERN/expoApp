@@ -37,7 +37,7 @@ exports.getAppontmentsByPatientId = async (req, res) => {
     }
   };
 
-  exports.getAppontmentsByDoctorId = async (req, res) => {
+  exports.getAppontmentsByDoctorName = async (req, res) => {
     try {
       const {doctorName } = req.body;
   
