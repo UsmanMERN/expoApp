@@ -10,7 +10,7 @@ app.use(express.json());
 
 // Connect to MongoDB
 mongoose
-  .connect(process.env.MONGO_URI, {
+  .connect(`${process.env.MONGO_URI}/expoapp`, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
