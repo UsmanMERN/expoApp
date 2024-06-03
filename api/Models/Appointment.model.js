@@ -13,13 +13,13 @@ const appointmentSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  additionalInformation: {
+  additionalInfo: {
     type: String,
     required: true,
   },
   patientId: {
     type: mongoose.Schema.Types.ObjectId,
-    ref:'User',
+    ref: 'User',
     required: true,
   },
 });

@@ -20,8 +20,10 @@ import DoctorsList from "../components/DoctorsList";
 import ServicesList from "../components/ServicesList";
 import TestimonialList from "../components/TestimonialList";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useNavigation } from "@react-navigation/native";
 
 const HomeScreen = () => {
+  const navigation = useNavigation()
   const [userData, setUserData] = useState(null);
 
   useEffect(() => {
@@ -78,7 +80,7 @@ const HomeScreen = () => {
                   placeholder="Find your doctor"
                 />
               </View>
-              <TouchableOpacity style={styles.bookButton}>
+              <TouchableOpacity style={styles.bookButton} onPress={() => { navigation.navigate("Appointment Booking") }}>
                 <Text style={styles.bookButtonText}>Book an Appointment</Text>
               </TouchableOpacity>
             </View>

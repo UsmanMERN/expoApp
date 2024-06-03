@@ -4,6 +4,8 @@ const appontmentController = require("../controller/appointment.controller");
 
 // Create a new user
 router.post("/addAppointment", appontmentController.addAppointment);
+router.post("/getAppontmentsByPatientId", appontmentController.getAppontmentsByPatientId);
+router.get("/getAppontmentsByDoctorName", appontmentController.getAppontmentsByDoctorName);
 
 // // Get all users
 // router.get("/", appontmentController.getAllUsers);

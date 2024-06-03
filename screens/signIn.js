@@ -45,8 +45,7 @@ const SignIn = () => {
     return emailRegex.test(email);
   };
 
-  const apiEndpoint =
-    "http://192.168.252.175:8000/api/auth/signin";
+  const apiEndpoint = `http://192.168.41.175:8000/api/auth/signin`;
 
   const handleSignIn = async () => {
     if (!email || !password) {

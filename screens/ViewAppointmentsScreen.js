@@ -1,16 +1,49 @@
-import React from 'react';
-import { StyleSheet, Text, View, FlatList, TouchableOpacity, Image } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { StyleSheet, Text, View, FlatList, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { FontAwesome5 } from '@expo/vector-icons';
+import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+const API_ENDPOINT = `http://192.168.41.175:8000/api/appointment/getAppointmentsByPatientId`;
 
 const ViewAppointmentsScreen = () => {
-  // Dummy data for appointments
-  const appointments = [
-    { id: '1', doctor: 'Dr. John Smith', date: 'May 31, 2024', time: '10:00 AM', specialty: 'Cardiologist' },
-    { id: '2', doctor: 'Dr. Jane Doe', date: 'June 3, 2024', time: '2:30 PM', specialty: 'Dermatologist' },
-    { id: '3', doctor: 'Dr. Alex Johnson', date: 'June 5, 2024', time: '11:15 AM', specialty: 'Neurologist' },
-  ];
+  const [appointments, setAppointments] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [userData, setUserData] = useState(null);
 
-  // Render individual appointment item
+  useEffect(() => {
+    fetchUserData();
+  }, []);
+
+  useEffect(() => {
+    if (userData) {
+      getAllAppointments();
+    }
+  }, [userData]);
+
+  const fetchUserData = async () => {
+    try {
+      const userDataString = await AsyncStorage.getItem('userData');
+      if (userDataString) {
+        const { user } = await JSON.parse(userDataString);
+        setUserData(user);
+      }
+    } catch (error) {
+      console.error('Error fetching user data:', error);
+    }
+  };
+
+  const getAllAppointments = async () => {
+    try {
+      const response = await axios.post(API_ENDPOINT, { patientId: userData._id });
+      setAppointments(response.data.data);
+    } catch (error) {
+      console.error("Error fetching appointments:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const renderAppointmentItem = ({ item }) => (
     <TouchableOpacity style={styles.card}>
       <View style={styles.cardLeft}>
@@ -24,13 +57,29 @@ const ViewAppointmentsScreen = () => {
     </TouchableOpacity>
   );
 
+  if (loading) {
+    return (
+      <View style={[styles.container, styles.loadingContainer]}>
+        <ActivityIndicator size="large" color="#00b894" />
+      </View>
+    );
+  }
+
+  if (appointments.length === 0) {
+    return (
+      <View style={[styles.container, styles.emptyContainer]}>
+        <Text style={styles.emptyText}>No Appointments</Text>
+      </View>
+    );
+  }
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>View Appointments</Text>
       <FlatList
         data={appointments}
         renderItem={renderAppointmentItem}
-        keyExtractor={item => item.id}
+        keyExtractor={(item) => item.id}
         contentContainerStyle={styles.listContent}
       />
     </View>
@@ -85,6 +134,18 @@ const styles = StyleSheet.create({
   },
   listContent: {
     paddingBottom: 20,
+  },
+  loadingContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  emptyContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  emptyText: {
+    fontSize: 18,
+    color: '#555',
   },
 });
 

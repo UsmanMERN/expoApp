@@ -6,7 +6,7 @@
   "scripts": {
     "start": "nodemon index.js"
   },
-  "author": "Mr. Rajkumar Khatua",
+  "author": "Muhammad Usman",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.1.1",
