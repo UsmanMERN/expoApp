@@ -159,7 +159,7 @@ const SignupScreen = () => {
   };
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: "#00b894" }}>
+    <ScrollView><SafeAreaView style={{ flex: 1, backgroundColor: "#00b894" }}>
       <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : null}
         style={{ flex: 1 }}
@@ -322,6 +322,7 @@ const SignupScreen = () => {
         </ScrollView>
       </KeyboardAvoidingView>
     </SafeAreaView>
+    </ScrollView>
   );
 };
 
