@@ -17,3 +17,5 @@ export const getData = async (key) => {
         return null;
     }
 };
+
+export const api_ENDPOINT = "http://192.168.41.175:8000/api"

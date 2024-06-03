@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, TouchableOpacity, TextInput, Platform, FlatList
 import DateTimePicker from '@react-native-community/datetimepicker';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { api_ENDPOINT } from '../utils/Services';
 
 const AppointmentBookingScreen = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -56,7 +57,7 @@ const AppointmentBookingScreen = () => {
     setDoctorName(text);
     if (text) {
       try {
-        const response = await axios.get(`http://192.168.41.175:8000/api/doctor/search?name=${text}`);
+        const response = await axios.get(`${api_ENDPOINT}/doctor/search?name=${text}`);
         if (response.data.data.length > 0) {
           setMatchingDoctors(response.data.data.slice(0, 3)); // Show only first 3 matches
           setNoDoctorsFound(false);

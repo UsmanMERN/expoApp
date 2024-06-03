@@ -18,7 +18,7 @@ import axios from "axios";
 // import { useAuth } from "../AuthContext"; // Import the useAuth hook
 import { AuthContext } from "../context/AuthContext";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-
+import { api_ENDPOINT } from "../utils/Services";
 const SignIn = () => {
   // const { updateAuthentication } = useAuth(); // Access the updateAuthentication function from the AuthContext
 
@@ -45,7 +45,7 @@ const SignIn = () => {
     return emailRegex.test(email);
   };
 
-  const apiEndpoint = `http://192.168.41.175:8000/api/auth/signin`;
+  const apiEndpoint = `${api_ENDPOINT}/auth/signin`;
 
   const handleSignIn = async () => {
     if (!email || !password) {

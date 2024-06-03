@@ -11,13 +11,13 @@ import DoctorCard from "../components/DoctorCard";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Feather } from "@expo/vector-icons";
 import axios from "axios";
-// import { APIENDPOINT } from "../App";
+import { api_ENDPOINT } from "../utils/Services";
 
 const DoctorListsScreen = () => {
   const [searchText, setSearchText] = useState(""); // State for the search input
   const [selectedCategory, setSelectedCategory] = useState(""); // State for the selected category
   const [doctorsData, setDoctorsData] = useState([]);
-  const API_ENDPOINT = `http://192.168.41.175:8000/api/doctor/getAllDoctors`;
+  const API_ENDPOINT = `${api_ENDPOINT}/doctor/getAllDoctors`;
 
   useEffect(() => {
     getAllDoctors();

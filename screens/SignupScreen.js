@@ -20,6 +20,7 @@ import { useNavigation } from "@react-navigation/native";
 import { BlurView } from "expo-blur";
 import { AuthContext } from "../context/AuthContext";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { api_ENDPOINT } from "../utils/Services";
 
 const SignupScreen = () => {
   const [name, setName] = useState("");
@@ -37,7 +38,7 @@ const SignupScreen = () => {
   const navigation = useNavigation();
 
   // Replace localhost with your machine's IP address
-  const apiEndpoint = `http://192.168.41.175:8000/api/auth/signup`
+  const apiEndpoint = `${api_ENDPOINT}/auth/signup`
 
   const handleGoToSignin = () => {
     navigation.navigate("Signin");
