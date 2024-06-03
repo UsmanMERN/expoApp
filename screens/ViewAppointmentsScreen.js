@@ -3,8 +3,8 @@ import { StyleSheet, Text, View, FlatList, TouchableOpacity, ActivityIndicator }
 import { FontAwesome5 } from '@expo/vector-icons';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
-const API_ENDPOINT = `http://192.168.41.175:8000/api/appointment/getAppointmentsByPatientId`;
+import { api_ENDPOINT } from '../utils/Services';
+const API_ENDPOINT = `${api_ENDPOINT}/appointment/getAppointmentsByPatientId`;
 
 const ViewAppointmentsScreen = () => {
   const [appointments, setAppointments] = useState([]);

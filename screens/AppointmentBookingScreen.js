@@ -87,7 +87,7 @@ const AppointmentBookingScreen = () => {
     setLoading(true);
 
     try {
-      const response = await axios.post('http://192.168.41.175:8000/api/appointment/addAppointment', appointmentDetails);
+      const response = await axios.post(`${api_ENDPOINT}/appointment/addAppointment`, appointmentDetails);
       setLoading(false);
       Alert.alert('Success', 'Your appointment has been confirmed!');
     } catch (error) {
