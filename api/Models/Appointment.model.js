@@ -9,6 +9,20 @@ const appointmentSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  slot: {
+    type: String,
+  },
+  status: {
+    type: String,
+  },
+  location: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'location'
+  },
+  staff: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'staff'
+  },
   doctorName: {
     type: String,
     required: true,
