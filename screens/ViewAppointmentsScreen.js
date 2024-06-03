@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, FlatList, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { StyleSheet, Text, View, FlatList, TouchableOpacity, ActivityIndicator, Button } from 'react-native';
 import { FontAwesome5 } from '@expo/vector-icons';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const API_ENDPOINT = `http://192.168.41.175:8000/api/appointment/getAppointmentsByPatientId`;
+const API_ENDPOINT = `http://10.62.38.19:8000/api/appointment/getAppontmentsByPatientId`;
 
 const ViewAppointmentsScreen = () => {
   const [appointments, setAppointments] = useState([]);
@@ -44,6 +44,10 @@ const ViewAppointmentsScreen = () => {
     }
   };
 
+  const getMyAppointments = ()=>{
+    getAllAppointments()
+  }
+
   const renderAppointmentItem = ({ item }) => (
     <TouchableOpacity style={styles.card}>
       <View style={styles.cardLeft}>
@@ -69,6 +73,10 @@ const ViewAppointmentsScreen = () => {
     return (
       <View style={[styles.container, styles.emptyContainer]}>
         <Text style={styles.emptyText}>No Appointments</Text>
+        <Button
+        onPress={getMyAppointments}
+        title='Get my appointments'
+        >Get my appointments</Button>
       </View>
     );
   }

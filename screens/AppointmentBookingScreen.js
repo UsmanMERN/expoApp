@@ -56,7 +56,7 @@ const AppointmentBookingScreen = () => {
     setDoctorName(text);
     if (text) {
       try {
-        const response = await axios.get(`http://192.168.41.175:8000/api/doctor/search?name=${text}`);
+        const response = await axios.get(`http://10.62.38.19:8000/api/doctor/search?name=${text}`);
         if (response.data.data.length > 0) {
           setMatchingDoctors(response.data.data.slice(0, 3)); // Show only first 3 matches
           setNoDoctorsFound(false);
@@ -65,7 +65,7 @@ const AppointmentBookingScreen = () => {
         }
         setShowDropdown(true);
       } catch (error) {
-        console.error("Error fetching matching doctors:", error);
+        // console.error("Error fetching matching doctors:", error);
       }
     } else {
       setShowDropdown(false);
@@ -86,7 +86,7 @@ const AppointmentBookingScreen = () => {
     setLoading(true);
 
     try {
-      const response = await axios.post('http://192.168.41.175:8000/api/appointment/addAppointment', appointmentDetails);
+      const response = await axios.post('http://10.62.38.19:8000/api/appointment/addAppointment', appointmentDetails);
       setLoading(false);
       Alert.alert('Success', 'Your appointment has been confirmed!');
     } catch (error) {
