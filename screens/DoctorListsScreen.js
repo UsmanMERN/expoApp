@@ -17,7 +17,7 @@ const DoctorListsScreen = () => {
   const [searchText, setSearchText] = useState(""); // State for the search input
   const [selectedCategory, setSelectedCategory] = useState(""); // State for the selected category
   const [doctorsData, setDoctorsData] = useState([]);
-  const API_ENDPOINT = `http://10.62.38.19:8000/api/doctor/getAllDoctors`;
+  const API_ENDPOINT = `http://192.168.41.237:8000/api/doctor/getAllDoctors`;
 
   useEffect(() => {
     getAllDoctors();

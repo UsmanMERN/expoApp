@@ -4,7 +4,7 @@ import { FontAwesome5 } from '@expo/vector-icons';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const API_ENDPOINT = `http://10.62.38.19:8000/api/appointment/getAppontmentsByPatientId`;
+const API_ENDPOINT = `http://192.168.41.237:8000/api/appointment/getAppontmentsByPatientId`;
 
 const ViewAppointmentsScreen = () => {
   const [appointments, setAppointments] = useState([]);
@@ -44,7 +44,7 @@ const ViewAppointmentsScreen = () => {
     }
   };
 
-  const getMyAppointments = ()=>{
+  const getMyAppointments = () => {
     getAllAppointments()
   }
 
@@ -74,8 +74,8 @@ const ViewAppointmentsScreen = () => {
       <View style={[styles.container, styles.emptyContainer]}>
         <Text style={styles.emptyText}>No Appointments</Text>
         <Button
-        onPress={getMyAppointments}
-        title='Get my appointments'
+          onPress={getMyAppointments}
+          title='Get my appointments'
         >Get my appointments</Button>
       </View>
     );
