@@ -46,7 +46,7 @@ const SignIn = () => {
   };
 
   const apiEndpoint =
-    "http://192.168.74.175:8000/api/auth/signin";
+    "http://192.168.252.175:8000/api/auth/signin";
 
   const handleSignIn = async () => {
     if (!email || !password) {

@@ -37,7 +37,7 @@ const SignupScreen = () => {
   const navigation = useNavigation();
 
   // Replace localhost with your machine's IP address
-  const apiEndpoint = "http://192.168.74.175:8000/api/auth/signup";
+  const apiEndpoint = "http://192.168.252.175:8000/api/auth/signup";
 
   const handleGoToSignin = () => {
     navigation.navigate("Signin");

@@ -12,10 +12,22 @@ import { FontAwesome, MaterialIcons, Ionicons } from "@expo/vector-icons";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useNavigation } from "@react-navigation/native";
 import CustomButton from "../components/CustomButton";
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+
+const Colors = {
+  PRIMARY: '#FFF',
+  LIGHT_PRIMARY: '#00b894',
+  WHITE: "#FFF",
+  BLACK: "#000",
+  GRAY: '#9A9393',
+  SECONDARY: '#03A9FF',      // Secondary color adjusted
+  GREEN: '#4CBF57',          // Green color adjusted
+}
 
 const DoctorDetailsScreen = ({ route }) => {
   const { doctor } = route.params ?? {};
   const navigation = useNavigation(); // Initialize navigation
+
 
   const handleViewProfile = () => {
     // Navigate to the DoctorDetails screen with the selected doctor's data
@@ -121,8 +133,9 @@ const DoctorDetailsScreen = ({ route }) => {
 
             {/* Button to Book an Appointment */}
             <View style={styles.buttonContainer}>
-              <TouchableOpacity style={styles.bookAppointmentButton}>
-                <Text style={styles.bookAppointmentText}>Book Appointment</Text>
+              <TouchableOpacity style={styles.menuButton} onPress={() => navigation.navigate('Appointment Booking')}>
+                <MaterialCommunityIcons name="calendar-plus" color={Colors.PRIMARY} size={30} />
+                <Text style={styles.menuButtonText}>Book Appointment</Text>
               </TouchableOpacity>
             </View>
           </>
@@ -265,6 +278,22 @@ const styles = StyleSheet.create({
     width: "100%",
     height: 370,
     resizeMode: "cover",
+  },
+  menuButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 30,
+    paddingVertical: 15,
+    paddingHorizontal: 20,
+    backgroundColor: Colors.LIGHT_PRIMARY,
+    borderRadius: 10,
+    marginHorizontal: 20,
+  },
+  menuButtonText: {
+    fontSize: 18,
+    color: Colors.PRIMARY,
+    marginLeft: 10,
   },
 });
 
